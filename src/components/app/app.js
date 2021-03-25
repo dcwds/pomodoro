@@ -1,5 +1,5 @@
 import Timer from "../timer"
-import { TIME_POMODORO } from "../timer/defaults"
+import { TIME_POMODORO } from "../../constants"
 import "./app.css"
 
 function App() {

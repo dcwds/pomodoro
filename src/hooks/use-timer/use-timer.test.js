@@ -1,0 +1,51 @@
+import { renderHook, act } from "@testing-library/react-hooks"
+import useTimer from "./use-timer"
+import { secondsToTime, formatTime } from "./fns"
+
+describe("useTimer", () => {
+  test("sets state from param", () => {
+    const { result } = renderHook(() => useTimer(10))
+
+    expect(result.current.timer).toEqual({
+      seconds: 10,
+      formattedTime: "00:00:10",
+      stopped: false
+    })
+  })
+
+  test("toggles stopped state", () => {
+    const { result } = renderHook(() => useTimer(10))
+
+    act(() => {
+      result.current.toggleStopped()
+    })
+
+    expect(result.current.timer.stopped).toBe(true)
+  })
+})
+
+describe("timer fns", () => {
+  test("converts seconds to time", () => {
+    expect(secondsToTime(1500)).toEqual({
+      hours: 0,
+      minutes: 25,
+      seconds: 0
+    })
+  })
+
+  test("converts seconds to time 2", () => {
+    expect(secondsToTime(3661)).toEqual({
+      hours: 1,
+      minutes: 1,
+      seconds: 1
+    })
+  })
+
+  test("formats time", () => {
+    expect(formatTime({ hours: 1, minutes: 25, seconds: 9 })).toBe("01:25:09")
+  })
+
+  test("formats time 2", () => {
+    expect(formatTime({ minutes: 24, seconds: 49 })).toBe("24:49")
+  })
+})

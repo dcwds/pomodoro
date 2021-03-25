@@ -1,7 +1,7 @@
-import useTimer from "../../hooks/useTimer"
+import useTimer from "../../hooks/use-timer"
 
 const Timer = ({ title, seconds }) => {
-  const [timer] = useTimer(seconds)
+  const { timer } = useTimer(seconds)
 
   return (
     <div>

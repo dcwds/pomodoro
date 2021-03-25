@@ -38,6 +38,7 @@
   "devDependencies": {
     "@craco/craco": "^6.1.1",
     "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@testing-library/react-hooks": "^5.1.0",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
     "prettier": "^2.2.1",

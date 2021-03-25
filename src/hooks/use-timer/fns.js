@@ -11,11 +11,8 @@ const secondsToTime = (seconds) => {
     const unit = timeInSeconds[key]
 
     if (seconds >= unit) {
-      let val = Math.floor(seconds / unit)
-
+      res[`${key}s`] = Math.floor(seconds / unit)
       seconds = seconds % unit
-
-      res[`${key}s`] = val
     } else {
       res[`${key}s`] = 0
     }
@@ -26,11 +23,7 @@ const secondsToTime = (seconds) => {
 
 const formatTime = (time) =>
   Object.keys(time)
-    .map((key) => {
-      const amount = time[key]
-
-      return String(amount).padStart(2, "0")
-    })
+    .map((key) => String(time[key]).padStart(2, "0"))
     .join(":")
 
 export { secondsToTime, formatTime }
