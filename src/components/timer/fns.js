@@ -33,6 +33,4 @@ const formatTime = (time) =>
     })
     .join(":")
 
-console.log(formatTime({ hours: 1, minutes: 25, seconds: 9 }))
-
 export { secondsToTime, formatTime }

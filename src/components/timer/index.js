@@ -13,3 +13,7 @@ Component behavior:
 - decrement secondsCount every second
 - timer can be started and stopped
 */
+
+import Timer from "./timer"
+
+export default Timer
