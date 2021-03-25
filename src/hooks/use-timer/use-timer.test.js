@@ -9,7 +9,7 @@ describe("useTimer", () => {
     expect(result.current.timer).toEqual({
       seconds: 10,
       formattedTime: "00:00:10",
-      stopped: false
+      stop: true
     })
   })
 
@@ -17,10 +17,10 @@ describe("useTimer", () => {
     const { result } = renderHook(() => useTimer(10))
 
     act(() => {
-      result.current.toggleStopped()
+      result.current.toggleStop()
     })
 
-    expect(result.current.timer.stopped).toBe(true)
+    expect(result.current.timer.stop).toBe(false)
   })
 })
 

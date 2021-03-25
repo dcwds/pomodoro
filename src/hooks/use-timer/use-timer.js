@@ -5,21 +5,21 @@ const useTimer = (seconds) => {
   const [timer, setTimer] = useState({
     seconds,
     formattedTime: formatTime(secondsToTime(seconds)),
-    stopped: false
+    stop: true
   })
 
-  const toggleStopped = () =>
+  const toggleStop = () =>
     setTimer((s) => {
-      const { stopped, ...rest } = s
+      const { stop, ...rest } = s
 
       return {
-        stopped: !stopped,
+        stop: !stop,
         ...rest
       }
     })
 
   useEffect(() => {
-    let { seconds, stopped } = timer
+    let { seconds, stop } = timer
 
     const tick = setInterval(() => {
       --seconds
@@ -27,18 +27,18 @@ const useTimer = (seconds) => {
       setTimer({
         seconds,
         formattedTime: formatTime(secondsToTime(seconds)),
-        stopped: stopped || seconds === 0
+        stop: stop || seconds === 0
       })
     }, 1000)
 
-    if (stopped) {
+    if (stop) {
       clearInterval(tick)
     }
 
     return () => clearInterval(tick)
   })
 
-  return { timer, toggleStopped }
+  return { timer, toggleStop }
 }
 
 export default useTimer
