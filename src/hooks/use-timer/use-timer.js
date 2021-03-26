@@ -13,8 +13,8 @@ const useTimer = (seconds) => {
       const { stop, ...rest } = s
 
       return {
-        stop: !stop,
-        ...rest
+        ...rest,
+        stop: !stop
       }
     })
 
@@ -37,6 +37,24 @@ const useTimer = (seconds) => {
 
     return () => clearInterval(tick)
   })
+
+  /*
+  useEffect(() => {
+    if (timer.stop) {
+      let notifyStop = new Notification("Pomodoro", {
+        body: "Timer has been stopped."
+      })
+
+      return () => notifyStop.close()
+    } else {
+      let notifyStart = new Notification("Pomodoro", {
+        body: "Timer has been started."
+      })
+
+      return () => notifyStart.close()
+    }
+  }, [timer.stop])
+  */
 
   return { timer, toggleStop }
 }
