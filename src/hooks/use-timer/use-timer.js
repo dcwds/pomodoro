@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
-import { secondsToTime, formatTime } from "./fns"
+import { secondsToTime, timeToCountdown } from "./fns"
+import { NOTIFY_TITLE } from "../../constants"
 
-const useTimer = (seconds) => {
+const useTimer = (seconds, doneText) => {
   const [timer, setTimer] = useState({
     seconds,
-    formattedTime: formatTime(secondsToTime(seconds)),
+    countdown: timeToCountdown(secondsToTime(seconds)),
+    done: false,
     stop: true
   })
 
@@ -19,14 +21,15 @@ const useTimer = (seconds) => {
     })
 
   useEffect(() => {
-    let { seconds, stop } = timer
+    let { seconds, done, stop } = timer
 
     const tick = setInterval(() => {
       --seconds
 
       setTimer({
         seconds,
-        formattedTime: formatTime(secondsToTime(seconds)),
+        countdown: timeToCountdown(secondsToTime(seconds)),
+        done: done || seconds === 0,
         stop: stop || seconds === 0
       })
     }, 1000)
@@ -38,23 +41,15 @@ const useTimer = (seconds) => {
     return () => clearInterval(tick)
   })
 
-  /*
   useEffect(() => {
-    if (timer.stop) {
-      let notifyStop = new Notification("Pomodoro", {
-        body: "Timer has been stopped."
+    if ("Notification" in window && timer.done) {
+      const notifyDone = new Notification(NOTIFY_TITLE, {
+        body: doneText
       })
 
-      return () => notifyStop.close()
-    } else {
-      let notifyStart = new Notification("Pomodoro", {
-        body: "Timer has been started."
-      })
-
-      return () => notifyStart.close()
+      return () => notifyDone.close()
     }
-  }, [timer.stop])
-  */
+  }, [timer.done, doneText])
 
   return { timer, toggleStop }
 }

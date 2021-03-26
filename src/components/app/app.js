@@ -5,7 +5,11 @@ import "./app.css"
 function App() {
   return (
     <div className="app">
-      <Timer title="Pomodoro" seconds={TIME_POMODORO} />
+      <Timer
+        title="Pomodoro"
+        seconds={TIME_POMODORO}
+        doneText="You have finished this pomodoro. Take a break!"
+      />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const useNotify = () => {
+const useNotify = (cb) => {
   const [notify, setNotify] = useState({
     supported: "Notification" in window,
     permitted: false || Notification.permission === "granted"
@@ -13,8 +13,8 @@ const useNotify = () => {
           const { permitted, ...rest } = s
 
           return {
-            permitted: true,
-            ...rest
+            ...rest,
+            permitted: true
           }
         })
       }

@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks"
 import useTimer from "./use-timer"
-import { secondsToTime, formatTime } from "./fns"
+import { secondsToTime, timeToCountdown } from "./fns"
 
 describe("useTimer", () => {
   test("sets state from param", () => {
@@ -8,7 +8,8 @@ describe("useTimer", () => {
 
     expect(result.current.timer).toEqual({
       seconds: 10,
-      formattedTime: "00:00:10",
+      countdown: "00:00:10",
+      done: false,
       stop: true
     })
   })
@@ -42,10 +43,12 @@ describe("timer fns", () => {
   })
 
   test("formats time", () => {
-    expect(formatTime({ hours: 1, minutes: 25, seconds: 9 })).toBe("01:25:09")
+    expect(timeToCountdown({ hours: 1, minutes: 25, seconds: 9 })).toBe(
+      "01:25:09"
+    )
   })
 
   test("formats time 2", () => {
-    expect(formatTime({ minutes: 24, seconds: 49 })).toBe("24:49")
+    expect(timeToCountdown({ minutes: 24, seconds: 49 })).toBe("24:49")
   })
 })

@@ -21,9 +21,9 @@ const secondsToTime = (seconds) => {
   return res
 }
 
-const formatTime = (time) =>
+const timeToCountdown = (time) =>
   Object.keys(time)
     .map((key) => String(time[key]).padStart(2, "0"))
     .join(":")
 
-export { secondsToTime, formatTime }
+export { secondsToTime, timeToCountdown }
