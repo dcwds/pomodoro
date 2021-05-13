@@ -27,16 +27,6 @@ describe("useTimer", () => {
       stop: false
     })
   })
-
-  test("toggles stop state", () => {
-    const { result } = renderHook(() => useTimer(10))
-
-    act(() => {
-      result.current.toggleStop()
-    })
-
-    expect(result.current.timer.stop).toBe(false)
-  })
 })
 
 describe("timer fns", () => {
