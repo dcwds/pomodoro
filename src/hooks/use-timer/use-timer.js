@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { secondsToTime, timeToCountdown } from "./fns"
 import { NOTIFY_TITLE } from "../../constants"
 
-const useTimer = (seconds, doneText) => {
+const useTimer = (seconds, doneText, notifyEnabled) => {
   const [timer, setTimer] = useState({
     seconds,
     countdown: timeToCountdown(secondsToTime(seconds)),
@@ -42,14 +42,14 @@ const useTimer = (seconds, doneText) => {
   })
 
   useEffect(() => {
-    if ("Notification" in window && timer.done) {
+    if (notifyEnabled && timer.done) {
       const notifyDone = new Notification(NOTIFY_TITLE, {
         body: doneText
       })
 
       return () => notifyDone.close()
     }
-  }, [timer.done, doneText])
+  }, [timer.done, doneText, notifyEnabled])
 
   return { timer, toggleStop }
 }

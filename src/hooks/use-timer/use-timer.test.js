@@ -14,7 +14,7 @@ describe("useTimer", () => {
     })
   })
 
-  test("toggles stopped state", () => {
+  test("toggles stop state", () => {
     const { result } = renderHook(() => useTimer(10))
 
     act(() => {

@@ -1,27 +1,27 @@
 import { useState } from "react"
 
-const useNotify = (cb) => {
-  const [notify, setNotify] = useState({
-    supported: "Notification" in window,
-    permitted: false || Notification.permission === "granted"
-  })
+const useNotify = () => {
+  const supported = "Notification" in window
+  const [ permitted, setPermitted ] = useState(
+    false || (supported && Notification.permission === "granted")
+  )
+  const [ enabled, setEnabled ] = useState(false)
 
-  const permitNotify = () => {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        setNotify((s) => {
-          const { permitted, ...rest } = s
+  const permitNotify = async () => {
+    const permission = await Notification.requestPermission()
 
-          return {
-            ...rest,
-            permitted: true
-          }
-        })
-      }
-    })
+    if(permission === "granted") {
+      setPermitted(true)
+    }
   }
 
-  return { notify, permitNotify }
+  return {
+    supported,
+    permitted,
+    enabled,
+    setEnabled,
+    permitNotify
+  }
 }
 
 export default useNotify

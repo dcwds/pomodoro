@@ -1,10 +1,11 @@
+import { useContext } from "react"
+import { TimersContext } from "../context"
 import { NotifyCheckbox } from "../notify"
 import useTimer from "../../hooks/use-timer"
-import useNotify from "../../hooks/use-notify"
 
 const Timer = ({ title, seconds, doneText }) => {
-  const { timer, toggleStop } = useTimer(seconds, doneText)
-  const { notify } = useNotify()
+  const { notify } = useContext(TimersContext)
+  const { timer, toggleStop } = useTimer(seconds, doneText, notify.enabled)
 
   return (
     <div>
