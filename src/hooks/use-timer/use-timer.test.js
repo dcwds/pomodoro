@@ -1,9 +1,9 @@
-import { renderHook, act } from "@testing-library/react-hooks"
+import { act, renderHook } from "@testing-library/react-hooks"
 import useTimer from "./use-timer"
 import { secondsToTime, timeToCountdown } from "./fns"
 
 describe("useTimer", () => {
-  test("sets state from param", () => {
+  test("sets state from param and decrements seconds after timer is started", () => {
     const { result } = renderHook(() => useTimer(10))
 
     expect(result.current.timer).toEqual({
@@ -11,6 +11,20 @@ describe("useTimer", () => {
       countdown: "00:00:10",
       done: false,
       stop: true
+    })
+
+    act(() => {
+      // start timer
+      result.current.toggleStop()
+
+      jest.advanceTimersByTime(1000)
+    })
+
+    expect(result.current.timer).toEqual({
+      seconds: 9,
+      countdown: "00:00:09",
+      done: false,
+      stop: false
     })
   })
 

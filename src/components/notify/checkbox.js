@@ -4,9 +4,12 @@ import { TimersContext } from "../context"
 const NotifyCheckbox = () => {
   const { notify } = useContext(TimersContext)
 
-  const onChange = () => {
-    notify.permitNotify()
-    notify.setEnabled(!notify.enabled)
+  const onChange = (e) => {
+    const checked = e.target.checked
+
+    if(checked) notify.permitNotify()
+
+    notify.setEnabled(checked)
   }
 
   return (
