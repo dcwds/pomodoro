@@ -4,6 +4,11 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom"
 
+global.Notification = {
+  requestPermission: jest.fn(),
+  permission: "granted"
+}
+
 beforeEach(() => {
   jest.useFakeTimers()
 })
