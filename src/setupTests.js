@@ -6,7 +6,13 @@ import "@testing-library/jest-dom"
 
 global.Notification = {
   requestPermission: jest.fn(),
-  permission: "granted"
+  _permission: "default",
+  set permission(value) {
+    this._permission = value
+  },
+  get permission() {
+    return this._permission
+  }
 }
 
 beforeEach(() => {

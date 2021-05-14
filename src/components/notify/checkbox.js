@@ -7,7 +7,7 @@ const NotifyCheckbox = () => {
   const onChange = (e) => {
     const checked = e.target.checked
 
-    if(checked) notify.permitNotify()
+    if (checked) notify.permitNotify()
 
     notify.setEnabled(checked)
   }

@@ -7,8 +7,8 @@ const Provider = ({ children }) => {
   const notify = useNotify()
 
   return (
-    <TimersContext.Provider value={ { notify: { ...notify } } }>
-      { children }
+    <TimersContext.Provider value={{ notify: { ...notify } }}>
+      {children}
     </TimersContext.Provider>
   )
 }
