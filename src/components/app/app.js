@@ -9,7 +9,7 @@ function App() {
       <div className="app">
         <Timer
           title="Pomodoro"
-          seconds={5}
+          seconds={TIME_POMODORO}
           doneText="You have finished this pomodoro. Take a break!"
         />
       </div>
