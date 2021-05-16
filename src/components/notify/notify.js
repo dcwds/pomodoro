@@ -7,7 +7,7 @@ const Notify = () => {
   const onChange = (e) => {
     const checked = e.target.checked
 
-    if (checked && notify.permission !== "granted") notify.permitNotify()
+    if (checked && !notify.permitted) notify.permitNotify()
 
     notify.setEnabled(checked)
   }
