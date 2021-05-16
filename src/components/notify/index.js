@@ -1,3 +1,1 @@
-import NotifyCheckbox from "./checkbox"
-
-export { NotifyCheckbox }
+export { default } from "./notify"
