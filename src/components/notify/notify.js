@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { TimersContext } from "../context"
 
-const NotifyCheckbox = () => {
+const Notify = () => {
   const { notify } = useContext(TimersContext)
 
   const onChange = (e) => {
     const checked = e.target.checked
 
-    if (checked) notify.permitNotify()
+    if (checked && notify.permission !== "granted") notify.permitNotify()
 
     notify.setEnabled(checked)
   }
@@ -18,10 +18,13 @@ const NotifyCheckbox = () => {
         type="checkbox"
         defaultChecked={notify.enabled}
         onChange={onChange}
+        aria-label="notify"
+        id="notify"
+        name="notify"
       />
-      Notify me when timer ends.
+      <label htmlFor="notify">Notify me when timer ends.</label>
     </div>
   )
 }
 
-export default NotifyCheckbox
+export default Notify

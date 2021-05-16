@@ -11,14 +11,10 @@ const useTimer = (seconds, doneText, notifyEnabled) => {
   })
 
   const toggleStop = () =>
-    setTimer((s) => {
-      const { stop, ...rest } = s
-
-      return {
-        ...rest,
-        stop: !stop
-      }
-    })
+    setTimer(({ stop, ...rest }) => ({
+      ...rest,
+      stop: !stop
+    }))
 
   useEffect(() => {
     let { seconds, done, stop } = timer
